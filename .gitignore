@@ -1,0 +1,16 @@
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 验证与调试产物
+.preview/
+*.log
+
+# WorkBuddy 项目数据（不同步）
+.workbuddy/
+
+# 依赖（本项目零依赖，此为兜底）
+node_modules/

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050810">
+<title>天球 · 太阳的四季轨迹</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="stage" aria-label="天球三维示意图"></canvas>
+
+<header class="masthead">
+  <div class="mark">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"/>
+      <ellipse cx="12" cy="12" rx="9" ry="3.4"/>
+      <circle class="dot" cx="12" cy="12" r="2.1"/>
+    </svg>
+  </div>
+  <div class="titles">
+    <h1>天球 <i>·</i> 太阳的四季轨迹</h1>
+    <p id="subline">北纬 39.9° · 6月21日 夏至 · 12:00 地方太阳时</p>
+  </div>
+</header>
+
+<aside class="panel panel--left">
+  <div class="field">
+    <div class="field__top">
+      <label for="lat">观测纬度 φ</label>
+      <output id="latOut">39.9° N</output>
+    </div>
+    <input id="lat" type="range" min="-90" max="90" step="0.1" value="39.9">
+    <div class="scale"><span>90°S</span><span>0°</span><span>90°N</span></div>
+    <div class="chips" data-group="lat">
+      <button data-val="0">赤道</button>
+      <button data-val="23.44">北回归线</button>
+      <button data-val="39.9">北京</button>
+      <button data-val="66.56">北极圈</button>
+      <button data-val="90">北极点</button>
+      <button data-val="-33.87">悉尼</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field__top">
+      <label for="doy">日期</label>
+      <output id="doyOut">6月21日 · 夏至</output>
+    </div>
+    <input id="doy" type="range" min="1" max="365" step="1" value="172">
+    <div class="chips" data-group="doy">
+      <button data-val="79">春分</button>
+      <button data-val="172">夏至</button>
+      <button data-val="266">秋分</button>
+      <button data-val="356">冬至</button>
+    </div>
+  </div>
+
+  <div class="field field--last">
+    <div class="switches">
+      <label><input type="checkbox" id="optSeasons" checked><span>四季轨迹</span></label>
+      <label><input type="checkbox" id="optGrid" checked><span>地平网格</span></label>
+      <label><input type="checkbox" id="optEq" checked><span>天赤道</span></label>
+      <label><input type="checkbox" id="optEc" checked><span>黄道</span></label>
+      <label><input type="checkbox" id="optMer" checked><span>子午圈</span></label>
+      <label><input type="checkbox" id="optAxis" checked><span>天轴天极</span></label>
+    </div>
+  </div>
+</aside>
+
+<div class="rail">
+  <aside class="panel panel--right">
+    <div class="readout">
+      <div class="row"><span>赤纬 δ</span><b id="oDec">+23.4°</b></div>
+      <div class="row"><span>高度角 h</span><b id="oAlt">73.5°</b></div>
+      <div class="row"><span>方位角 A</span><b id="oAz">180.0°</b></div>
+      <div class="row"><span>时角 H</span><b id="oHa">0.0°</b></div>
+    </div>
+    <div class="divider"></div>
+    <div class="readout">
+      <div class="row"><span>日出</span><b id="oRise">04:56</b></div>
+      <div class="row"><span>日落</span><b id="oSet">19:04</b></div>
+      <div class="row"><span>昼长</span><b id="oLen">14h 08m</b></div>
+      <div class="row"><span>正午高度</span><b id="oNoon">73.5°</b></div>
+    </div>
+    <div class="divider"></div>
+    <div class="noon">
+      <div class="noon__title">四季正午太阳高度</div>
+      <div class="noon__grid" id="noonGrid"></div>
+    </div>
+    <div class="status" id="oStatus">太阳位于地平线以上</div>
+  </aside>
+
+  <div class="panel legend" id="legend"></div>
+</div>
+
+<div class="dock">
+  <button class="play" id="play" aria-label="播放一天的运行">
+    <svg class="ico-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.6 2.6 12.6 8l-8 5.4Z"/></svg>
+    <svg class="ico-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg>
+  </button>
+  <div class="timeline">
+    <input id="hour" type="range" min="0" max="24" step="0.01" value="12" aria-label="地方太阳时">
+    <div class="timeline__axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+  </div>
+  <output class="clock" id="hourOut">12:00</output>
+</div>
+
+<p class="hint">拖拽旋转 · 滚轮缩放</p>
+
+<script src="app.js"></script>
+</body>
+</html>
